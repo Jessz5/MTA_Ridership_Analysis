@@ -3,17 +3,16 @@
 WITH daily_totals AS (
     SELECT
         DATE(transit_timestamp) AS date,
-        CASE
-            WHEN EXTRACT(DOW FROM transit_timestamp) IN (0, 6)
-            THEN 'Weekend' ELSE 'Weekday'
-        END AS day_type,
         SUM(ridership) AS daily_ridership
     FROM dec_2024_ridership
-    GROUP BY date, day_type
+    GROUP BY date
 )
 
 SELECT
-    day_type,
+    CASE
+        WHEN EXTRACT(DOW FROM date) IN (0, 6) THEN 'Weekend'
+        ELSE 'Weekday'
+    END AS day_type,
     AVG(daily_ridership) AS avg_ridership_per_day
 FROM daily_totals
 GROUP BY day_type;
