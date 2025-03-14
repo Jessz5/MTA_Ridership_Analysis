@@ -1,13 +1,13 @@
-## Riding Through the Holidays: MTA December 2024 Ridership Analysis
+## MTA December 2024 Ridership Analysis
 
-December is one of the busiest months in New York City, with holiday shopping, tourism, and year-end events driving fluctuations in subway ridership. This project analyzes MTA data from December 2024 to uncover trends in peak travel times, station activity, and commuting patterns during the holiday season. By analyzing key metrics such as ridership by borough, busiest stations, and holiday impacts, this study provides actionable insights for the MTA, local businesses, and commuters.
+This project analyzes MTA data from December 2024 to uncover trends in peak travel times, station activity, and commuting patterns throughout the holiday season. By analyzing key metrics such as ridership by borough, busiest stations, and holiday impacts, this study provides actionable insights for the MTA, local businesses, and commuters.
 
-The analysis is based on the [MTA Subway Hourly Ridership (2020-2024)](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-2020-2024/wujg-7c2s/about_data) dataset, which includes detailed information on ridership counts, station complexes, boroughs, and timestamps.
+The analysis is based on the [MTA Subway Hourly Ridership (2020-2024)](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-2020-2024/wujg-7c2s/about_data) dataset, available on DATA.NY.GOV, which includes detailed information on ridership counts, station complexes, boroughs, and timestamps.
 
  **SQL queries and Python scripts:** Explore the code behind the analysis in the [project_sql folder](/project_sql/) and [project_python folder](/project_python/).
 
 ## Key Questions
-Here are the questions I explored through data analysis:
+Here are the key questions explored through data analysis:
 
 1. What was the total ridership for December 2024?
 2. What were the busiest and least busy days of the month?
@@ -22,10 +22,11 @@ Here are the questions I explored through data analysis:
 
 ## Tools I Used
 For this project, I leveraged the following tools and technologies:
-- **Python:** Created scripts for fetching and cleaning MTA Subway Hourly Ridership data—one fetches data from the [API](https://data.ny.gov/resource/wujg-7c2s.json) and saves it as a CSV, while the other cleans it by correcting timestamps, removing duplicates, and handling missing values.
+- **Python:** Created scripts for fetching and cleaning MTA Subway Hourly Ridership data—one script fetches data from the [API](https://data.ny.gov/resource/wujg-7c2s.json) and saves it as a CSV, while the other cleans it by correcting timestamps, removing duplicates, and handling missing values.
 - **SQL (PostgreSQL):** Built a PostgreSQL database to store the dataset and wrote SQL queries to analyze ridership trends.
 - **Visual Studio Code:** Used as the primary IDE for writing, executing, and managing project files.
 - **Git & GitHub:** Implemented version control using Git to track changes in code and SQL queries. The project repository is hosted on GitHub for easy sharing and collaboration.
+- **Tableau Public:** Created visualizations and combined them into a single dashboard to effectively communicate ridership trends and insights.
 
 ## The Analysis
 Each query was designed to answer specific questions about MTA ridership in December 2024. Below is a breakdown of the analysis:
@@ -37,7 +38,7 @@ SELECT SUM(ridership) AS total_ridership
 FROM dec_2024_ridership;
 ```
 
-In December 2024, the MTA subway system recorded a total ridership of **97,422,983**.
+In December 2024, the MTA subway system recorded a total ridership of **97,422,983 rides**.
 
 ### 2. Busiest and Least Busy Days
 ```sql
@@ -56,19 +57,19 @@ ORDER BY total_ridership ASC
 LIMIT 5;
 ```
 
-The busiest days of December 2024, based on total ridership, were:
-* **2024-12-04**: 4,410,504 riders
-* **2024-12-10**: 4,386,308 riders
-* **2024-12-18**: 4,336,726 riders
-* **2024-12-13**: 4,211,534 riders
-* **2024-12-17**: 4,179,662 riders
+The busiest days in December 2024, based on total ridership, were:
+* **2024-12-04**: 4,410,504 rides
+* **2024-12-10**: 4,386,308 rides
+* **2024-12-18**: 4,336,726 rides
+* **2024-12-13**: 4,211,534 rides
+* **2024-12-17**: 4,179,662 rides
 
 The least busy days, based on ridership, were:
-* **2024-12-25**: 1,406,821 riders
-* **2024-12-08**: 1,835,451 riders
-* **2024-12-01**: 1,908,324 riders
-* **2024-12-22**: 2,074,407 riders
-* **2024-12-29**: 2,131,916 riders
+* **2024-12-25**: 1,406,821 rides
+* **2024-12-08**: 1,835,451 rides
+* **2024-12-01**: 1,908,324 rides
+* **2024-12-22**: 2,074,407 rides
+* **2024-12-29**: 2,131,916 rides
 
 ### 3. Weekday vs. Weekend Ridership
 ```sql
@@ -90,7 +91,7 @@ FROM daily_totals
 GROUP BY day_type;
 ```
 
-On average, **3.48 million riders** used the subway on weekdays, compared to **2.30 million riders** on weekends. This represents a **51% higher ridership on weekdays**, highlighting the subway’s role as a primary mode of transportation for work and school commutes.
+On average, **3.49 million rides** were taken on weekdays, compared to **2.30 million rides** on weekends. This represents a **52% higher ridership on weekdays**, highlighting the subway’s role as a primary mode of transportation for work and school-related commutes.
 
 ### 4. Highest and Lowest Ridership Days of the Week
 ```sql
@@ -113,8 +114,8 @@ ORDER BY total_ridership ASC
 LIMIT 1;
 ```
 
-**Highest Ridership Day:** Tuesday, with **17,779,637 riders.**<br>
-**Lowest Ridership Day:** Sunday, with **10,298,821 riders.**
+**Highest Ridership Day:** Tuesday, with **17,779,637 rides.**<br>
+**Lowest Ridership Day:** Sunday, with **10,298,821 rides.**
 
 ### 5. Ridership by Borough
 ```sql
@@ -125,13 +126,13 @@ ORDER BY total_ridership DESC;
 ```
 
 Ridership across New York City’s boroughs revealed significant disparities, with Manhattan dominating subway usage:
-* **Manhattan:** 55,933,124 riders
-* **Brooklyn:** 20,898,378 riders
-* **Queens:** 14,083,425 riders
-* **Bronx:** 6,339,357 riders
-* **Staten Island:** 168,699 riders
+* **Manhattan:** 55,933,124 rides
+* **Brooklyn:** 20,898,378 rides
+* **Queens:** 14,083,425 rides
+* **Bronx:** 6,339,357 rides
+* **Staten Island:** 168,699 rides
 
-Manhattan accounted for over **57% of total ridership**, reflecting its central role as a hub for work, tourism, and commerce.
+**Manhattan** saw **55,933,124 rides**, accounting for over **57% of total subway ridership**, highlighting its central role as a hub for work, tourism, and commerce.
 
 ### 6. Peak vs. Off-Peak Hours
 ```sql
@@ -141,19 +142,24 @@ GROUP BY hour
 ORDER BY total_ridership DESC;
 ```
 
-**Peak Hours:**
-* 5 PM: 9,058,724 riders
-* 4 PM: 8,346,360 riders
-* 3 PM: 7,717,297 riders
-* 6 PM: 6,974,394 riders
+**Morning Rush Hours:**
+* 8 AM: 6,776,808 rides
+* 7 AM: 5,746,532 rides
+* 9 AM: 5,246,062 rides
 
-**Off-Peak Hours:**
-* 3 AM: 211,212 riders
-* 2 AM: 223,233 riders
-* 1 AM: 406,157 riders
-* 4 AM: 462,751 riders
+**Afternoon/Evening Rush Hours:**
+* 5 PM: 9,058,724 rides
+* 4 PM: 8,346,360 rides
+* 3 PM: 7,717,297 rides
+* 6 PM: 6,974,394 rides
 
-The evening rush hours (3 PM–6 PM) were the busiest, while early morning hours (1 AM–4 AM) saw the lowest ridership.
+**Early Morning Hours:**
+* 3 AM: 211,212 rides
+* 2 AM: 223,233 rides
+* 1 AM: 406,157 rides
+* 4 AM: 462,751 rides
+
+The busiest periods were the morning rush hours (7 AM–9 AM) and afternoon/evening rush hours (3 PM–6 PM), with ridership peaking at 8 AM and 5 PM. In contrast, the lowest ridership occurred during the early morning hours (1 AM–4 AM).
 
 ### 7. Top 10 Busiest Stations
 ```sql
@@ -199,7 +205,7 @@ The least busy subway stations in December 2024 were:
 9. Aqueduct Racetrack (A)
 10. Beach 44 St (A)
 
-These stations are located in less densely populated areas or serve niche transportation needs.
+These stations are located in less densely populated areas.
 
 ### 9. Ridership Around Christmas and New Year's Eve
 ```sql
@@ -224,7 +230,7 @@ WHERE date IN ('2024-12-23', '2024-12-24', '2024-12-25', '2024-12-29', '2024-12-
 ORDER BY date;
 ```
 
-Ridership around major holidays saw a significant drop on **Christmas Day (2024-12-25)**, with **only 1,406,821 riders-a 55.23% decrease** compared to the **monthly average of 3,142,676 riders**.
+Ridership dropped significantly on **Christmas Day**, with a **55% decrease** compared to the daily average, reflecting the impact of holiday closures and reduced commuting.
 
 |    Date    | Total Ridership | Percent Change |
 |------------|-----------------|---------------:|
@@ -286,30 +292,35 @@ The top stations with the biggest increase in ridership from mid-December to pre
 
 These stations likely saw increased traffic due to holiday shopping, tourism, and year-end events.
 
+## Tableau Dashboard
+<img src="MTA Ridership Dashboard.png" style="width: 30%; height: 30%; max-width: none; display: block;">
+
+[View Dashboard on Tableau Public](https://public.tableau.com/views/MTASubwayRidershipDecember2024/Dashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
 ## Conclusion
 This analysis of MTA ridership data for December 2024 offers valuable insights into how New Yorkers and visitors navigate the city during the holiday season. Key findings include:
 
-* **Total Ridership:** Over **97 million riders** used the subway in December 2024.
+* **Total Ridership:** Over **97 million rides** were taken on the subway in December 2024.
 * **Busiest Days:** Tuesdays had the highest overall ridership in December, with Wednesday, **December 4th**, being the single busiest day.
-* **Weekday vs. Weekend Ridership:** Weekdays averaged **3.48 million riders per day**, compared to **2.30 million riders** on weekends, reflecting the subway’s primary use for work and school commutes.
+* **Weekday vs. Weekend Ridership:** Weekdays averaged **3.49 million rides per day**, compared to **2.30 million rides** on weekends.
 * **Borough Trends:** **Manhattan** dominated ridership, accounting for over **57% of total ridership**, followed by **Brooklyn** and **Queens**. **Staten Island** had the lowest ridership, consistent with its smaller subway network.
-* **Peak Hours:** Evening rush hours (**3 PM - 6 PM**) were the busiest, while early morning hours (**1 AM - 4 AM**) saw the lowest ridership.
+* **Peak Hours:** Morning rush hours (**7 AM - 9 AM**) and afternoon/evening rush hours (**3 PM - 6 PM**) were the busiest, with 8 AM and 5 PM being the peak times, while early morning hours (**1 AM - 4 AM**) saw the lowest ridership.
 * **Station Activity:** Major transit hubs like **Times Square** and **Grand Central** were the busiest, while stations in less densely populated areas saw minimal activity.
-* **Holiday Impact:** Ridership dropped significantly on **Christmas Day**, with a **55.23% decrease** compared to the monthly average.
-* **Holiday Ridership Trends:** Leading up to the holidays, stations like **Times Square** and **34 St-Herald Sq** experienced the largest ridership increases, likely due to holiday shopping and tourism.
+* **Holiday Impact:** Ridership dropped significantly on **Christmas Day**, with a **55% decrease** compared to the daily average. New Year's Eve also saw a 7.8% decrease, reflecting reduced commuting during major holidays.
+* **Pre-Holiday Ridership Trends:** In the days leading up to the holidays, ridership at stations like **Times Square** and **34 St-Herald Sq** increased, likely due to holiday shopping and tourism.
 
 ## Business Impact
 These insights provide actionable recommendations for the **MTA**, **businesses**, and **commuters**:
 
 #### For the MTA:
-* **Optimize Train Schedules:** Increase frequency during peak hours (**3 PM - 6 PM**) and reduce service during off-peak hours (**1 AM - 4 AM**) to improve operational efficiency.
+* **Optimize Train Schedules:** Increase frequency during rush hours (**7 AM - 9 AM**) & (**3 PM - 6 PM**) and reduce service during early morning hours (**1 AM - 4 AM**) to improve operational efficiency.
 * **Resource Allocation:** Focus staffing and maintenance efforts on high-traffic stations like **Times Square** and **Grand Central**.
-* **Holiday Planning:** Adjust schedules during holidays (e.g., **Christmas Day**) to reflect lower ridership.
+* **Holiday Planning:** Adjust schedules during holidays (e.g., **Christmas Day and New Year's Eve**) to better align with lower ridership.
 
 #### For Businesses:
 * **Marketing:** Run promotions near busy stations (e.g., **Times Square**) during peak hours to attract commuters.
 * **Staffing:** Schedule more staff during pre-holiday periods to handle increased customer traffic.
-* **Location Strategy:** Use ridership data to identify high-traffic areas for new business opportunities or pop-up events.
+* **Location Strategy:** Use ridership data to identify high-traffic areas for new business opportunities or pop-up events, particularly during the holiday season.
 
 #### For Commuters:
-* **Travel Planning:** Avoid peak hours (**3 PM - 6 PM**) to reduce congestion and plan trips during low-ridership periods (e.g., early mornings) for a more comfortable experience.
+* **Travel Planning:** If possible, avoid rush hours (**7 AM - 9 AM and 3 PM - 6 PM**) to reduce congestion and plan trips during low-ridership periods (e.g., late mornings or early afternoons) for a more comfortable experience.
